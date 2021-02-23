@@ -1,0 +1,39 @@
+<h2> Customer Search </h2>
+
+<section class="search-form">
+  <%= form_for :customers, method: :get do |f| %>
+    <div class="input-group input-group-lg">
+      <%= label_tag :keywords, nil, class: "sr-only" %>
+      <%# The label is hidden, but is still available for SEO %>
+      <%= text_field_tag :keywords, nil,
+         placeholder: "First/Last Name or Email",
+         class: "form-control input-lg" %>
+      <span class="input-group-btn">
+        <%= submit_tag "Find Customers", class: "btn btn-primary btn-lg" %>
+      </span>
+    </div>
+  <% end %>
+</section>
+
+<section class="search-results">
+
+  <table id="customer-table" class="table table-striped">
+    <thead>
+      <th scope="col"> First Name </th>
+      <th scope="col"> Last Name </th>
+      <th scope="col"> Email </th>
+      <th scope="col"> Joined </th>
+    </thead>
+    <tbody>
+      <% @customers.each do |c| %>
+        <tr scope="row">
+          <td> <%= c.firstname %> </td>
+          <td> <%= c.lastname %> </td>
+          <td> <%= c.email %> </td>
+          <td> <%= c.created_at.to_date %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
